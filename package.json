@@ -26,9 +26,9 @@
     "example": "./example"
   },
   "scripts": {
-    "build": "browserify ./src/index.js -t reactify -t literalify -x react -s Typeahead -d",
-    "dist:dev": "npm --loglevel=silent run build > dist/react-typeahead-component.dev.js",
-    "dist:min": "npm --loglevel=silent run build -- -t [envify --NODE_ENV production] | uglifyjs -cmvb beautify=false,ascii_only=true - > dist/react-typeahead-component.min.js",
+    "build": "npm run-script dist:dev && npm run-script dist:min && npm run-script jsx",
+    "dist:dev": "./node_modules/.bin/webpack",
+    "dist:min": "COMPRESS=true ./node_modules/.bin/webpack",
     "test": "karma start",
     "test:dev": "karma start --no-single-run --browsers Chrome",
     "jsx": "jsx ./src ./dist/npm -x jsx -x js"
@@ -43,6 +43,7 @@
     "browserify-shim": "^3.8.6",
     "envify": "^3.4.0",
     "insert-css": "^0.2.0",
+    "jsx-loader": "^0.13.2",
     "karma": "^0.12.31",
     "karma-browserify": "^4.1.2",
     "karma-chrome-launcher": "^0.1.7",
@@ -57,10 +58,12 @@
     "karma-sinon-chai": "^0.3.0",
     "literalify": "^0.4.0",
     "mocha": "^2.2.4",
+    "node-libs-browser": "^0.5.2",
     "react-tools": "^0.13.1",
     "reactify": "^1.0.0",
     "uglify-js": "^2.4.20",
-    "watchify": "^2.4.0"
+    "watchify": "^2.4.0",
+    "webpack": "^1.9.10"
   },
   "literalify": {
     "react": "window.React || require('react')"

@@ -18,4 +18,4 @@ if (doc) {
     head.insertBefore(styleElement, head.firstChild);
 }
 
-module.exports = require('./components/typeahead');
+module.exports = require('./components/typeahead.jsx');
